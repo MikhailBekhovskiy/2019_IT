@@ -15,11 +15,13 @@ def get_kernel(windos_size, sigma):
             strakhoten = 2*(sigma**2)
             offsetX = i - windos_size//2
             offsetY = j - windos_size//2
-            kernel[i, j] = (1/(m.pi*strakhoten))*m.exp(-(offsetX**2+offsetY**2)/strakhoten)
+            kernel[i, j] = (1/(m.pi*strakhoten))*m.exp\
+                (-(offsetX**2 + offsetY**2) / strakhoten)
+    kernel /= kernel.sum()
     return kernel
 
 
-def filter(img, window_size=3, sigma = 3):
+def filter(img, window_size=3, sigma=3):
     img2 = np.zeros_like(img)
     kernel = get_kernel(window_size, sigma)
     p = window_size//2
